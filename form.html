@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<title>Pattern generation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    .button {
+        background-color: rgb(165, 70, 6);
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button4 {
+        border-radius: 4px;
+    }
+</style>
+
+<body>
+    <div class="w3-container">
+        <h1>Pattern generation</h1>
+        <hr />
+        <p>
+            <a href="/">Home</a>
+        </p>
+        <div>
+            <form method="post" id="form" class="w3-container w3-card-4 w3-light-grey">
+                <p>
+                    <label><b>Enter some characters or numbers (Maximum 16):</b></label>
+                </p>
+                <input class="w3-input w3-border w3-round" name="content" type="text" value="abc">
+                <div name="resolutions">
+                    <p><label><b>Select an image resolution in pixels:</b></label></p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="ratio" value="640" checked>
+                        <label>Default: 640 x 640</label>
+                    </p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="ratio" value="800">
+                        <label>Webpage: 800 x 800</label>
+                    </p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="ratio" value="1024">
+                        <label>Slide: 1024 x 1024</label>
+                    </p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="ratio" value="2048">
+                        <label>Print: 2048 x 2048</label>
+                    </p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="ratio" value="4096">
+                        <label>High resolution plot: 4096 x 4096</label>
+                    </p>
+                </div>
+
+                <div name="maps">
+                    <p><label><b>Select a map:</b></label></p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="map" value="set0" checked>
+                        <label>set0</label>
+                    </p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="map" value="set1">
+                        <label>set1</label>
+                    </p>
+                    <p>
+                        <input class="w3-radio" type="radio" name="map" value="set2">
+                        <label>set2</label>
+                    </p>
+                </div>
+                <div class="row">
+                    <p>
+                        <button class="button button4" type="submit" value="Submit">Submit</button>
+                        <button class="button button4" type="reset" value="Reset">Reset</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="card">
+            <h3>The image</h3>
+            <div>
+                <p id="info"></p>
+            </div>
+            <div class="row">
+                <p id="result">
+                </p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Presented by <a href="https://5deen.com">5deen</a></p>
+        </div>
+
+    </div>
+
+    <script type="module">
+
+        import { createSVGDocument } from "./build/release.js";
+
+        document.getElementById('form').addEventListener('submit', (event) => {
+            // stop form submission
+            event.preventDefault();
+
+            let ratio = form.elements['ratio'].value ? parseInt(form.elements['ratio'].value) : 800;
+            let map = form.elements['map'].value ? form.elements['map'].value : "set0";
+            let text = form.elements['content'].value < 1 ? "a" : form.elements['content'].value;
+            let el = createSVGDocument(ratio, map, text);
+            let encoded = btoa(el);
+            let src = `data:image/svg+xml;base64,${encoded}`;
+            let img = `<img src="${src}"/>`;
+
+            document.getElementById("result").innerHTML = img;
+
+        });
+    </script>
+</body>
+
+</html>
