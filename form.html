@@ -78,7 +78,7 @@
                             <div class="card-body">
 
                                 <form method="post" id="form">
-                                    <textarea class="form-control" id="GenerateTextarea" rows="3"
+                                    <textarea class="form-control" name="content" rows="3"
                                         placeholder="Enter your text"></textarea>
                                     <p style="margin-top:20px"><button type="submit"
                                             class="btn btn-outline-light btn-lg px-4 me-sm-3 fw-bold">Generate</button>
@@ -96,6 +96,16 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="card">
+                        <h3>The pattern</h3>
+                        <div>
+                            <p id="info"></p>
+                        </div>
+                        <div class="row">
+                            <p id="result">
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -113,6 +123,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
+    <script type="module">
+
+        import { createSVGDocument } from "./build/release.js";
+
+        document.getElementById('form').addEventListener('submit', (event) => {
+            // stop form submission
+            event.preventDefault();
+
+            let ratio = 800;
+            let map = "set0";
+            let text = form.elements['content'].value < 1 ? "a" : form.elements['content'].value;
+            let el = createSVGDocument(ratio, map, text);
+            let encoded = btoa(el);
+            let src = `data:image/svg+xml;base64,${encoded}`;
+            let img = `<img src="${src}"/>`;
+
+            document.getElementById("result").innerHTML = img;
+
+        });
+    </script>
 </body>
 
 </html>
