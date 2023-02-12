@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colors</title>
+</head>
+<style>
+  body.main {
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    margin-right: 20px;
+    margin-left: 20px;
+
+  }
+
+  h2.title {
+    margin-left: 20px;
+  }
+
+  div.color {
+
+    border-style: solid;
+    border-width: 30px;
+    border-color: #e8e8e8;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+</style>
+
+<body class="main">
+  <div id="main">
+    <h1>Colors</h1>
+    <hr>
+    </hr>
+    <p id="info"></p>
+    <div id="list"></div>
+  </div>
+  <script src="colors.js"></script>
+
+  <script>
+    function createColorTuple(colors) {
+      let result = [];
+      let counter = 1;
+
+      colors.forEach(element => {
+        result.push(`<h2 class="title">${counter}. Division: ${element.div}</h2><div class="color" style="background-color: ${element.canvas_color};border-color:${element.line_color}"></div>`);
+        counter++;
+      });
+
+      return result.join("\n");
+
+    }
+    let selected = 1;
+    document.getElementById("list").innerHTML = createColorTuple(colorset[selected]);
+    document.getElementById("info").innerHTML = `Number: ${colorset[selected].length}`;
+  </script>
+</body>
+
+</html>
