@@ -31,7 +31,7 @@ async function instantiate(module, imports = {}) {
       // assembly/index/SVGNode(~lib/string/String, ~lib/string/String, ~lib/array/Array<~lib/string/String>) => ~lib/string/String
       w = __retain(__lowerString(w) || __notnull());
       h = __retain(__lowerString(h) || __notnull());
-      children = __lowerArray((pointer, value) => { __setU32(pointer, __lowerString(value) || __notnull()); }, 6, 2, children) || __notnull();
+      children = __lowerArray((pointer, value) => { __setU32(pointer, __lowerString(value) || __notnull()); }, 7, 2, children) || __notnull();
       try {
         return __liftString(exports.SVGNode(w, h, children) >>> 0);
       } finally {
@@ -41,13 +41,13 @@ async function instantiate(module, imports = {}) {
     },
     StyleNode(children) {
       // assembly/index/StyleNode(~lib/array/Array<~lib/string/String>) => ~lib/string/String
-      children = __lowerArray((pointer, value) => { __setU32(pointer, __lowerString(value) || __notnull()); }, 6, 2, children) || __notnull();
+      children = __lowerArray((pointer, value) => { __setU32(pointer, __lowerString(value) || __notnull()); }, 7, 2, children) || __notnull();
       return __liftString(exports.StyleNode(children) >>> 0);
     },
     GroupNode(id, children, transform) {
       // assembly/index/GroupNode(~lib/string/String, ~lib/array/Array<~lib/string/String>, ~lib/string/String?) => ~lib/string/String
       id = __retain(__lowerString(id) || __notnull());
-      children = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerString(value) || __notnull()); }, 6, 2, children) || __notnull());
+      children = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerString(value) || __notnull()); }, 7, 2, children) || __notnull());
       transform = __lowerString(transform) || __notnull();
       try {
         exports.__setArgumentsLength(arguments.length);
